@@ -18,3 +18,5 @@ Route::get('/about', 'PagesController@about');
 // Route::get('/about', function () {
 //     return view('pages.about');
 // });
+
+Route::resource('posts', 'PostsController');
