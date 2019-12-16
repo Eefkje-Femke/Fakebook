@@ -16,7 +16,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::orderBy('created_at', 'desc')->simplePaginate(10);
-        return view('posts.index')->with('posts', $posts);
+        return view('posts.index')->with('posts', $posts);//laat alle posts zien (nieuw -> oud)
     }
 
     /**
@@ -40,16 +40,46 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
+            'cover_image' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:1999'
         ]);
         
-        
+        //file upload
+        // if($request->hashFile('cover_image')){//select something
+        //     //Get Filename with extension
+        //     $FilenameWithEXT = $request->file('cover_image')->getClientOriginalName();
+        //     //Get filename
+        //     $filename = pathinfo($FilenameWithEXT, PATHINFO_FILENAME);
+        //     //Get extension
+        //     $extension = $request->file('cover_image')->getClientOriginalExtension();
+        //     //Filename to store
+        //     $fileNameToStore = $filename.'_'.time().'.'.$extension;//same name file
+        //     //upload
+        //     $path= $request->file('cover_image')->storeAS('public/cover_images', $fileNameToStore);
+        // }else {
+        //     $fileNameToStore = 'noimage.jpg';
+        // }
+
+
+        if($request->hashFile('cover_image')){//select something
+            //Get filename
+            $filename = $request->file('cover_image');
+            //Creating file name
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $filename->move(public_path('public/cover_images'), $fileNameToStore);
+        }else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+
         //create post
         $post = new post;
         $post->title = $request->input('title');
+        $post->cover_image = $fileNameToStore;
         $post->body = $request->input('body');
         $post->save();
 
-        return redirect('/posts')->with('success', 'Post Created');
+        return redirect('/posts')->with('success', 'Post created');
     }
 
     /**
@@ -72,7 +102,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
@@ -84,7 +115,19 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+        
+        
+        //create post
+        $post = Post::find($id);
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+
+        return redirect('/posts')->with('success', 'Post updated');//post message
     }
 
     /**
@@ -95,6 +138,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/posts')->with('success', 'Post removed');
     }
 }
