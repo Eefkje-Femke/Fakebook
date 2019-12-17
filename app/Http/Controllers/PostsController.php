@@ -60,7 +60,7 @@ class PostsController extends Controller
         // }
 
 
-        if($request->hashFile('cover_image')){//select something
+        if($request->hasFile('cover_image')){//select something
             //Get filename
             $filename = $request->file('cover_image');
             //Creating file name
@@ -119,7 +119,12 @@ class PostsController extends Controller
             'title' => 'required',
             'body' => 'required',
         ]);
+
         
+        if ($request->hasFile('cover_image')) {
+            Storage::delete('public/cover_images/' . $post->cover_image);
+            $post->cover_image = $fileNameToStore;
+        }
         
         //create post
         $post = Post::find($id);

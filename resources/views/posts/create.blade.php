@@ -11,9 +11,9 @@
             {{Form::label('body', 'Body')}}
             {{Form::textarea('body', '', ['class' => 'form-control', 'placeholder' => 'Body text'])}}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             {{Form::file('cover_image')}}  
-        </div>
+        </div> --}}
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
     {!! Form::close() !!}
 @endsection
