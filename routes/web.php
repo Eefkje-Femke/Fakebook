@@ -24,3 +24,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/logout', 'LoginController@logout');
+
+// Route::get('logout', 'Auth\AuthController@logout');
+// Auth::logout();
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
