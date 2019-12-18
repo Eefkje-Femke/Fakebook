@@ -1,3 +1,4 @@
+{{--@extends('layouts.app')--}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -7,7 +8,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        @include('inc.navbar')
+        @include('layouts.app')
         <div class="container">
             <div class="jumbotron text-center">
                 <div class="container">
