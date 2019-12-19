@@ -44,33 +44,20 @@ class PostsController extends Controller
         ]);
         
         //file upload
-        // if($request->hashFile('cover_image')){//select something
-        //     //Get Filename with extension
-        //     $FilenameWithEXT = $request->file('cover_image')->getClientOriginalName();
-        //     //Get filename
-        //     $filename = pathinfo($FilenameWithEXT, PATHINFO_FILENAME);
-        //     //Get extension
-        //     $extension = $request->file('cover_image')->getClientOriginalExtension();
-        //     //Filename to store
-        //     $fileNameToStore = $filename.'_'.time().'.'.$extension;//same name file
-        //     //upload
-        //     $path= $request->file('cover_image')->storeAS('public/cover_images', $fileNameToStore);
-        // }else {
-        //     $fileNameToStore = 'noimage.jpg';
-        // }
-
-
         if($request->hasFile('cover_image')){//select something
+            //Get Filename with extension
+            $FilenameWithEXT = $request->file('cover_image')->getClientOriginalName();
             //Get filename
-            $filename = $request->file('cover_image');
-            //Creating file name
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $filename = pathinfo($FilenameWithEXT, PATHINFO_FILENAME);
+            //Get extension
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;//same name file
             //upload
-            $filename->move(public_path('public/cover_images'), $fileNameToStore);
+            $path= $request->file('cover_image')->storeAS('public/cover_images', $fileNameToStore);
         }else {
             $fileNameToStore = 'noimage.jpg';
         }
-
 
         //create post
         $post = new post;

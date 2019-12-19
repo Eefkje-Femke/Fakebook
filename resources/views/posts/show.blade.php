@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="/posts" class="btn btn-outline-dark" style="margin: 15px;">Go Back</a>
+<a href="/posts" class="btn btn-outline-dark" style="margin-top: 15px;">Go Back</a>
     <h1>{{$post->title}}</h1>
-    <div>
-        {{$post->body}}
-    </div>
-    <small>Written on {{$post->created_at}}</small>
+        <img style="width:50%" src="/storage/cover_images/{{$post->cover_image}}">
+        <div>
+            {{$post->body}}
+        </div>
+        <small>Written on {{$post->created_at}}</small>
     <hr>
     <a href="/posts/{{$post->id}}/edit" class="btn btn-outline-dark">Edit</a>
 
