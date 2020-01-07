@@ -61,6 +61,9 @@
                         Profiel
                       </a> 
                       <a class="dropdown-item">
+                        Create post
+                      </a> 
+                      <a class="dropdown-item">
                         Instellingen
                       </a> 
                       <a class="dropdown-item" href="{{ route('logout') }}"
