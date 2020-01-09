@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use App\Post;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -15,8 +16,13 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(10);
+        // $posts = Post::orderBy('created_at', 'desc')->simplePaginate(10); 
+
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $posts = $user->posts()->simplePaginate(10);//orderBy?
         return view('posts.index')->with('posts', $posts);//laat alle posts zien (nieuw -> oud)
+
     }
 
     /**
@@ -40,6 +46,7 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
+            'user_id' => 'required',
             'cover_image' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:1999'
         ]);
         
