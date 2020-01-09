@@ -13,7 +13,7 @@
 
 //PagesController
 Route::get('/', 'PagesController@index');
-Route::get('/about', 'PagesController@about');
+Route::get('/settings', 'PagesController@settings');
 
 // Route::get('/about', function () {
 //     return view('pages.about');

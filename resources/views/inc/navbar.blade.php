@@ -43,7 +43,7 @@
                       <a class="dropdown-item" href="{{ action('PostsController@index')}}">
                         Forum
                       </a>
-                      <a class="dropdown-item">
+                    <a class="dropdown-item" href="{{ action('PagesController@settings')}}">
                         Instellingen
                       </a> 
                       <a class="dropdown-item" href="{{ route('logout') }}"
