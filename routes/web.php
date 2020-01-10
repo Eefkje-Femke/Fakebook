@@ -15,10 +15,6 @@
 Route::get('/', 'PagesController@index');
 Route::get('/settings', 'PagesController@settings');
 
-// Route::get('/about', function () {
-//     return view('pages.about');
-// });
-
 Route::resource('posts', 'PostsController');
 Auth::routes();
 
