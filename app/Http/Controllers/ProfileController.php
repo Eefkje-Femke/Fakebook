@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
     public function index(){
-
-        $profiles = User::all()->toArray();
+        $getuser = auth()->user();
+        $profiles = DB::table('users')->where('id', $getuser->id)->first();
+        //dd($profiles);
         return view('profile.profile', compact('profiles'));
     }
 }
