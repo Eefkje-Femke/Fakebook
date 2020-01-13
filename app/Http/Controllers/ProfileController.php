@@ -15,4 +15,14 @@ class ProfileController extends Controller
         //dd($profiles);
         return view('profile.profile', compact('profiles'));
     }
+
+    public function edit(){
+        $getuser = auth()->user();
+        $profiles = DB::table('users')->where('id', $getuser->id)->first();
+        return view('profile.edit', compact('profiles'));
+    }
+
+    public function update(Request $request){
+        
+    }
 }

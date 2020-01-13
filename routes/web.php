@@ -36,4 +36,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('profile', 'ProfileController');
 Route::get('/profile', 'ProfileController@index')->name('profile.index');
