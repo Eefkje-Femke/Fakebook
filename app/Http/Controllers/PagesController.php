@@ -9,6 +9,8 @@ class PagesController extends Controller
     public function index(){
         $title = 'Index page';
         return view('pages.index')->with('title', $title);
+                                  
+        // return view('pages.index')->with('title', $title);
     }
 
     public function settings(){

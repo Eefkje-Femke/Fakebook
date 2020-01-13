@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\User;
 
 class HomeController extends Controller
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users =  User::where('id', '!=', auth()->id())->simplePaginate(5);
+        return view('home', compact('users'));
     }
 }
