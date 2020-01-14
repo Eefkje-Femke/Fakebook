@@ -43,8 +43,8 @@
                       <a class="dropdown-item" href="{{ action('PostsController@index')}}">
                         Forum
                       </a>
-                    <a class="dropdown-item" href="{{ action('PagesController@settings')}}">
-                        Settings
+                    <a class="dropdown-item" href="{{ action('FollowController@yourfollowers')}}">
+                        Follow page
                       </a> 
                       <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

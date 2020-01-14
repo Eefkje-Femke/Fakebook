@@ -13,7 +13,7 @@
 
 //PagesController
 Route::get('/', 'PagesController@index');
-Route::get('/settings', 'PagesController@settings');
+Route::get('/follower', 'FollowController@yourfollowers');
 
 Route::resource('posts', 'PostsController');
 Auth::routes();
@@ -24,3 +24,13 @@ Route::get('/logout', 'LoginController@logout');
 
 // Route::get('logout', 'Auth\AuthController@logout');
 // Auth::logout();
+
+//following
+Route::get('/follow/{user_id}', [
+    'uses' => 'FollowController@follow',
+    'as' => 'followUser'
+]);
+Route::get('/unfollow/{user_id}', [
+    'uses' => 'FollowController@unFollow',
+    'as' => 'unfollowUser'
+]);

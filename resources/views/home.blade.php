@@ -21,13 +21,19 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Chat?</th>
+                                <th>Follow</th>
+                                <th>Unfollow</th>
                             </tr>                            
                                 @foreach($users as $user)   
                                     <tr>                         
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>Chat?</td>
+                                        <td><a class="btn btn-primary" role="button" href="{{ route('followUser', ['user_id' => $user->id]) }}">
+                                            Follow User
+                                        </a></td>
+                                        <td><a class="btn btn-danger" role="button" href="{{ route('unfollowUser', ['user_id' => $user->id]) }}">
+                                            Unfollow User
+                                        </a></td>
                                     </tr>                              
                                 @endforeach                            
                         </table>

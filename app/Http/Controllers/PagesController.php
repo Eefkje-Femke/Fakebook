@@ -12,10 +12,5 @@ class PagesController extends Controller
                                   
         // return view('pages.index')->with('title', $title);
     }
-
-    public function settings(){
-        return view('pages.settings');
-    }
-
 }
 
