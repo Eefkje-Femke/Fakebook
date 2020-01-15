@@ -34,7 +34,3 @@
     <div>
     </div>
 @endsection
-
-{{--
-    wie volg jij?
---}}

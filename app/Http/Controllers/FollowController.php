@@ -31,9 +31,6 @@ class FollowController extends Controller
 
     public function followUser(){//wie jij volgt
         $user_id = auth()->user()->id;
-        // $followers_id = DB::table('followers')->where('follower_id', $user_id)->pluck('leader_id');
-        // $users = User::whereIn('id', $followers_id)->get();
-        
         //select * from users inner join followers ON users.id = leader_id Where follower_id =2
         $Usersfollowing = User::join('followers', 'users.id', '=', 'leader_id')->where('follower_id', '=', $user_id)->get();
 
