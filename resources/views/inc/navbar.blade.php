@@ -43,7 +43,7 @@
                       <a class="dropdown-item" href="{{ action('PostsController@index')}}">
                         Forum
                       </a>
-                    <a class="dropdown-item" href="{{ action('FollowController@yourfollowers')}}">
+                    <a class="dropdown-item" href="{{ action('FollowController@followUser')}}">
                         Follow page
                       </a> 
                       <a class="dropdown-item" href="{{ route('logout') }}"

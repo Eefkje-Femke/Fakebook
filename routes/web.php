@@ -13,7 +13,7 @@
 
 //PagesController
 Route::get('/', 'PagesController@index');
-Route::get('/follower', 'FollowController@yourfollowers');
+Route::get('/follower', 'FollowController@followUser');
 
 Route::resource('posts', 'PostsController');
 Auth::routes();

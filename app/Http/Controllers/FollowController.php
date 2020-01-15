@@ -29,24 +29,16 @@ class FollowController extends Controller
         return redirect()->back()->with('success', 'Successfully unfollowed the user.');
     }
 
-    public function showFollowing(){
-
-    }
-
-    public function yourFollowers(){//wie jij volgt
-        // where follower_id is  {{Auth::user()->id}}
+    public function followUser(){//wie jij volgt
         $user_id = auth()->user()->id;
-        $followers_id = DB::table('followers')->where('follower_id', $user_id)->pluck('leader_id');
+        // $followers_id = DB::table('followers')->where('follower_id', $user_id)->pluck('leader_id');
+        // $users = User::whereIn('id', $followers_id)->get();
+        
+        //select * from users inner join followers ON users.id = leader_id Where follower_id =2
+        $Usersfollowing = User::join('followers', 'users.id', '=', 'leader_id')->where('follower_id', '=', $user_id)->get();
 
-        foreach($followers_id as $id){
-            // $users= DB::table('users')->where('id', $id);
-            // $users = DB::table('users')->where('id', $id)->first();
-            $users = User::find(3); 
-        } 
-        $users = User::find(3); 
-
-        // dd($users);
-
-        return view('Pages.follower', compact('users'));
+        //select * from users inner join followers ON users.id = follower_id where leader_id = 2
+        $followingUsers = User::join('followers', 'users.id', '=', 'follower_id')->where('leader_id', '=', $user_id)->get();
+        return view('Pages.follower')->with(compact('Usersfollowing'))->with(compact('followingUsers'));
     }
 }
