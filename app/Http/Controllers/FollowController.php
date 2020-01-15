@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use DB;
+
 
 class FollowController extends Controller
 {
@@ -27,13 +29,24 @@ class FollowController extends Controller
         return redirect()->back()->with('success', 'Successfully unfollowed the user.');
     }
 
-    public function showFollowers(){
+    public function showFollowing(){
 
     }
 
     public function yourFollowers(){//wie jij volgt
         // where follower_id is  {{Auth::user()->id}}
+        $user_id = auth()->user()->id;
+        $followers_id = DB::table('followers')->where('follower_id', $user_id)->pluck('leader_id');
 
-        return view('Pages.follower');
+        foreach($followers_id as $id){
+            // $users= DB::table('users')->where('id', $id);
+            // $users = DB::table('users')->where('id', $id)->first();
+            $users = User::find(3); 
+        } 
+        $users = User::find(3); 
+
+        // dd($users);
+
+        return view('Pages.follower', compact('users'));
     }
 }
