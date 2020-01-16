@@ -13,24 +13,27 @@
 
 //PagesController
 Route::get('/', 'PagesController@index');
-Route::get('/follower', 'FollowController@followUser');
-
-Route::resource('posts', 'PostsController');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
 //Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/logout', 'LoginController@logout');
 
 // Route::get('logout', 'Auth\AuthController@logout');
 // Auth::logout();
 
-//following
-Route::get('/follow/{user_id}', [
-    'uses' => 'FollowController@follow',
-    'as' => 'followUser'
-]);
-Route::get('/unfollow/{user_id}', [
-    'uses' => 'FollowController@unFollow',
-    'as' => 'unfollowUser'
-]);
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('posts', 'PostsController');
+    Route::get('/home', 'HomeController@index');
+
+    //following
+    Route::get('/follower', 'FollowController@followUser');
+    Route::get('/follow/{user_id}', [
+        'uses' => 'FollowController@follow',
+        'as' => 'followUser'
+    ]);
+    Route::get('/unfollow/{user_id}', [
+        'uses' => 'FollowController@unFollow',
+        'as' => 'unfollowUser'
+    ]);
+   });
+   
