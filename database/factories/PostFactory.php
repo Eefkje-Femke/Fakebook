@@ -9,6 +9,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->title,
         'body' => $faker->body,
+        'cover_image' => $faker->image,
         'user_id' => $faker->id,
     ];
 });
