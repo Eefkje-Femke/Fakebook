@@ -13,6 +13,7 @@
 
 //PagesController
 Route::get('/', 'PagesController@index');
+
 Auth::routes();
 
 //Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -22,8 +23,8 @@ Route::get('/logout', 'LoginController@logout');
 // Auth::logout();
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::resource('posts', 'PostsController');
     Route::get('/home', 'HomeController@index');
+    Route::resource('posts', 'PostsController');
 
     //following
     Route::get('/follower', 'FollowController@followUser');

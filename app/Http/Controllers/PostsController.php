@@ -20,7 +20,7 @@ class PostsController extends Controller
 
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $posts = $user->posts()->simplePaginate(10);//orderBy?
+        $posts = $user->posts()->orderBy('created_at', 'desc')->simplePaginate(10);//orderBy?
         return view('posts.index')->with('posts', $posts);//laat alle posts zien (nieuw -> oud)
 
     }
@@ -46,7 +46,6 @@ class PostsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
-            'user_id' => 'required',
             'cover_image' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:1999'
         ]);
         
