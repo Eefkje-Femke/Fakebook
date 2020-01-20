@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use app\Post;
+use App\Post;
 
 class PostTest extends TestCase
 {
@@ -17,14 +17,17 @@ class PostTest extends TestCase
      */
     public function testFirstTest()
     {
-        // factory(Post::class, 5)->create();
-        // $first = factory(Post::class)->create(['title' => 'tilte1']);
+        factory(Post::class, 5)->create();
+        $first = factory(Post::class)->create(['title' => 'Datitle1Das']);
 
-        // $second = Post::postSearch("title1");
-        // //Er moeten 2 contacten in de lijst zitten
-        // $this->assertEquals($posts->count(), 2);
-        // //De eerste is bekend
-        // $this->assertEquals($posts->first()->id, $first->id);
+        $result = Post::all();
+        $this->assertEquals($result->count(), 6);
+
+        $result = Post::postSearch("title1");
+        //Er moeten 1 POST in de lijst zitten
+        $this->assertEquals($result->count(), 1);
+        //De eerste is bekend
+        $this->assertEquals($result->first()->id, $first->id);
 
         $this->assertTrue(true);
     }
