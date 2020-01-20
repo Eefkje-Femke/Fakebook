@@ -41,33 +41,31 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $avatar = $request->file('avatar');
-        $user = Auth::user();
-        $avatarName = $user->id.'_avatar'.time().'.'.$avatar->getClientOriginalExtension();
-        $img = Image::make($avatar)->resize(150, 150);
-        //dd($img);
-        $img->save(public_path('avatars'.$avatarName));
-        $user->avatar = $avatarName;
-        $user->save();
-        //dd($avatarName);
+        // $avatar = $request->file('avatar');
+        // $user = Auth::user();
+        // $avatarName = $user->id.'_avatar'.time().'.'.$avatar->getClientOriginalExtension();
         // $img = Image::make($avatar)->resize(150, 150);
         // //dd($img);
-        // $img->save();
-
-        //Goede code!!!!
-        // $request->validate([
-        //     'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-        
-        // $user = Auth::user();
-        
-        // $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
-        
-        // //dd($avatarName);
-        // $request->avatar->storeAs('avatars',$avatarName);
-       
+        // $public_path = public_path().'avatars'.$avatarName;
+        // $img->save($public_path);
         // $user->avatar = $avatarName;
         // $user->save();
+
+        //Goede code!!!!
+
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        
+        $user = Auth::user();
+        
+        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+        
+        //dd($avatarName);
+        $request->avatar->storeAs('avatars',$avatarName);
+       
+        $user->avatar = $avatarName;
+        $user->save();
 
         return redirect('/profile')->with('success','You have successfully uploaded your image.');
     }
