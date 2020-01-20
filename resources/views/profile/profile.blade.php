@@ -2,7 +2,8 @@
 
 @section('content')
 <h1>{{ Auth::user()->name}} </h1>
-    <table class="table">
+<img src="/storage/avatars/{{Auth::user()->avatar}}" class="rounded-circle" style="max-width:200px; height:200px; margin-bottom:10px">  
+<table class="table">
         <tr>
             <th>Name</th>
             <th>Email</th>
