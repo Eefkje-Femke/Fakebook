@@ -46,6 +46,9 @@
                     <a class="dropdown-item" href="{{ action('FollowController@followUser')}}">
                         Follow page
                       </a> 
+                      <a class="dropdown-item" href="{{ action('CalendarController@index')}}">
+                        Calendar
+                      </a> 
                       <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">

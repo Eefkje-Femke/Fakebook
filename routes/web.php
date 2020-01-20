@@ -36,5 +36,8 @@ Route::group(['middleware' => ['auth']], function() {
         'uses' => 'FollowController@unFollow',
         'as' => 'unfollowUser'
     ]);
+
+    //calendar
+    Route::get('/calendar','CalendarController@index')->name('index');
    });
    
