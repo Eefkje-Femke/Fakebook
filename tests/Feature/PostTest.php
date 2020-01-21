@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -34,15 +35,9 @@ class PostTest extends TestCase
         $this->assertTrue(true);
     }
     
-    public function testFileStore(){
-        Storage::fake('public');
- 
-        $this->json('post', '/upload', [
-            'file' => $file = UploadedFile::fake()->image('random.jpg')
-        ]);
- 
-        $this->assertEquals('file/' . $file->hashName(), Upload::latest()->first()->file);
- 
-        Storage::disk('public')->assertExists('file/' . $file->hashName());
+    public function testLink(){
+        $this->visit('/home')
+        ->click('Create Post')
+        ->seePageIs('/post');
     }
 }
