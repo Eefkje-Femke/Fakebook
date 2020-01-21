@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use App\Post;
 
@@ -15,7 +17,7 @@ class PostTest extends TestCase
      *
      * @return void
      */
-    public function testFirstTest()
+    public function testSearchPost()
     {
         factory(Post::class, 5)->create();
         $first = factory(Post::class)->create(['title' => 'Datitle1Das']);
@@ -30,5 +32,17 @@ class PostTest extends TestCase
         $this->assertEquals($result->first()->id, $first->id);
 
         $this->assertTrue(true);
+    }
+    
+    public function testFileStore(){
+        Storage::fake('public');
+ 
+        $this->json('post', '/upload', [
+            'file' => $file = UploadedFile::fake()->image('random.jpg')
+        ]);
+ 
+        $this->assertEquals('file/' . $file->hashName(), Upload::latest()->first()->file);
+ 
+        Storage::disk('public')->assertExists('file/' . $file->hashName());
     }
 }

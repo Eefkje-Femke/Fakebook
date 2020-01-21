@@ -22,4 +22,8 @@ class Post extends Model
     public static function postSearch($keyword){
         return Post::where("title", "LIKE", "%$keyword%");
     }
+
+    public static function postFile(){
+        return Post::where("cover_image", "LIKE", "%$keyword%");
+    }
 }
