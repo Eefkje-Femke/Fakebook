@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use App\Post;
+use App\User;
 
 class PostTest extends TestCase
 {
@@ -34,8 +35,19 @@ class PostTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function test_post_orderby(){
-        factory(Post::class, 5)->create();
-        
+    public function test_only_users_can_see_posts(){
+        $response = $this->get('/posts')->assertRedirect('/login');
     }
+
+    public function test_Post_can_be_added_through_form(){
+        $post = factory(Post::class)->create([
+            'title' => 'TestingTitle',
+            'body' => 'TestingBody'
+        ]);
+
+        $result = Post::all();
+        $this->assertEquals($result->count(), 1);
+    }
+
+    
 }
