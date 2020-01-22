@@ -18,8 +18,7 @@ class PostTest extends TestCase
      *
      * @return void
      */
-    public function testSearchPost()
-    {
+    public function test_search_post(){
         factory(Post::class, 5)->create();
         $first = factory(Post::class)->create(['title' => 'Datitle1Das']);
 
@@ -34,10 +33,9 @@ class PostTest extends TestCase
 
         $this->assertTrue(true);
     }
-    
-    public function testLink(){
-        $this->visit('/home')
-        ->click('Create Post')
-        ->seePageIs('/post');
+
+    public function test_post_orderby(){
+        factory(Post::class, 5)->create();
+        
     }
 }
