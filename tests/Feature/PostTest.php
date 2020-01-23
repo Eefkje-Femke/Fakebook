@@ -58,6 +58,5 @@ class PostTest extends TestCase
         $result = Post::all();
         $this->assertEquals($result->count(), 1);
     }
-
     
 }
