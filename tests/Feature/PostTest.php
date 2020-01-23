@@ -49,5 +49,15 @@ class PostTest extends TestCase
         $this->assertEquals($result->count(), 1);
     }
 
+    public function test_title_is_required(){
+        $post = factory(Post::class)->create([
+            'title' => ' ',
+            'body' => 'TestingBody'
+        ]);
+
+        $result = Post::all();
+        $this->assertEquals($result->count(), 1);
+    }
+
     
 }
