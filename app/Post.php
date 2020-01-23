@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Post extends Model
 {
@@ -12,4 +13,17 @@ class Post extends Model
     public $primaryKey = 'id';
     // Timestamps
     public $timestamps = true;
+
+    public function user(){
+        // return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public static function postSearch($keyword){
+        return Post::where("title", "LIKE", "%$keyword%");
+    }
+
+    public static function postFile(){
+        return Post::where("cover_image", "LIKE", "%$keyword%");
+    }
 }
