@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Image;
-use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
