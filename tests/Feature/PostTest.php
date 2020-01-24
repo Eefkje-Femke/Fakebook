@@ -48,21 +48,4 @@ class PostTest extends TestCase
         $result = Post::all();
         $this->assertEquals($result->count(), 1);
     }
-
-    public function testpostUpload()
-    {
-        Storage::fake('cover_image');
-
-        $file = UploadedFile::fake()->image('cover_image.jpg');
-
-        $response = $this->json('POST', '/posts', [
-            'cover_image' => $file,
-        ]);
-
-        // Assert the file was stored...
-        Storage::disk('cover_image')->assertExists($file->hashName());
-
-        // Assert a file does not exist...
-        Storage::disk('cover_image')->assertMissing('missing.jpg');
-    }
 }
