@@ -49,14 +49,20 @@ class PostTest extends TestCase
         $this->assertEquals($result->count(), 1);
     }
 
-    public function test_title_is_required(){
-        $post = factory(Post::class)->create([
-            'title' => ' ',
-            'body' => 'TestingBody'
+    public function testpostUpload()
+    {
+        Storage::fake('cover_image');
+
+        $file = UploadedFile::fake()->image('cover_image.jpg');
+
+        $response = $this->json('POST', '/posts', [
+            'cover_image' => $file,
         ]);
 
-        $result = Post::all();
-        $this->assertEquals($result->count(), 1);
+        // Assert the file was stored...
+        Storage::disk('cover_image')->assertExists($file->hashName());
+
+        // Assert a file does not exist...
+        Storage::disk('cover_image')->assertMissing('missing.jpg');
     }
-    
 }
