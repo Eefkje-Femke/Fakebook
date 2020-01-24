@@ -23,9 +23,5 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        $users =  User::where('id', '!=', auth()->id())->simplePaginate(5);
-        return view('home', compact('users'));
-    }
+
 }
