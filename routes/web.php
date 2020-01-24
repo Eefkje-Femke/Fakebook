@@ -24,11 +24,13 @@ Route::get('/logout', 'LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('profile', 'ProfileController');
-Route::get('/profile', 'ProfileController@index')->name('profile.index');
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', 'HomeController@index');
+    //posts
     Route::resource('posts', 'PostsController');
+    //profile
+    Route::resource('profile', 'ProfileController');
+    Route::get('/profile', 'ProfileController@index')->name('profile.index');
 
     //following
     Route::get('/follower', 'FollowController@followUser');
